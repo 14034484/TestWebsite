@@ -1,0 +1,88 @@
+Stappenplan voor het aanmaken van een website.
+
+Deze website heeft de volgende fucnties/eigenschappen:
+- .NET Framework 4.6.1 (.NET Core)
+- ASP.NET Core 1.1
+- Authentication: Individual User Accounts
+
+Stap 1: Aanmaken van het project
+- Aanmaken project : https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?tabs=aspnetcore2x
+- Koppelen/aanmaken van Git aan het project : https://docs.microsoft.com/en-us/vsts/git/gitquickstart?tabs=visual-studio
+- Toevoegen van een authenticatie: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/
+
+Stap 2: Aanmaken van een map Models indien deze nog niet aanwezig is
+
+Stap 3: Aanmaken van een controller
+- Aanmaken controller: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller
+
+------------------------------------------------------------------------------------------------------------------------
+TIP: Statische zoals plaatjes of stylesheet bestanden kan je plaatsen in de map wwwroot
+TIP: Data types: http://www.tutorialsteacher.com/csharp/csharp-data-types
+TIP: Value type and reference type: http://www.tutorialsteacher.com/csharp/csharp-value-type-and-reference-type
+TIP: Classes: http://www.tutorialsteacher.com/csharp/csharp-class
+------------------------------------------------------------------------------------------------------------------------
+TIP: Gebruiken van List: http://www.tutorialsteacher.com/csharp/csharp-list
+Bijv. IEnumerable<Student>
+TIP: Gebruiken van de object-initializer: http://www.tutorialsteacher.com/csharp/csharp-object-initializer
+Bijv. Student std = new Student() { StudentID = 1, 
+                                      StudentName = "Bill", 
+                                      Age = 20, 
+                                      Address = "New York"   
+                                    };
+TIP: Gebruiken van nullable types: http://www.tutorialsteacher.com/csharp/csharp-nullable-types
+Bijv. int? i = null;
+TIP: Gebruiken van var: http://www.tutorialsteacher.com/csharp/csharp-var-implicit-typed-local-variable
+------------------------------------------------------------------------------------------------------------------------
+
+Stap 4: Gebruiken van LINQ
+------------------------------------------------------------------------------------------------------------------------
+TIP: Vergeet niet te gebruiken: using System.Linq
+------------------------------------------------------------------------------------------------------------------------
+- Voor een query kan je LINQ gebruiken: http://www.tutorialsteacher.com/linq/linq-tutorials
+- LINQ Query Syntax: http://www.tutorialsteacher.com/linq/linq-query-syntax
+- LINQ Method Syntax: http://www.tutorialsteacher.com/linq/linq-method-syntax
+- Lambda Expression voor LINQ methodes: http://www.tutorialsteacher.com/linq/linq-lambda-expression
+
+------------------------------------------------------------------------------------------------------------------------
+TIP: Anonymous types
+Bijv. var anonymous = new { Name = "Fred" };
+TIP: Anonymous method
+Bijv. delegate(Student s) { return s.Age > 12 && s.Age < 20; };
+TIP: Anonymous Lambda Expression
+Bijv. s => s.Age > 12 && s.Age < 20
+------------------------------------------------------------------------------------------------------------------------
+
+Stap 5: Testen
+Voeg aan de solution toe met [Add], [New Project] een xUnit Test Project (.Net Core) toe 
+In Visual Studio 2017 is dit de eenvoudigste manier
+Het geven van diverse commando’s (zoals in sommige handleidingen) is niet nodig
+
+Add a reference to the Console App (waar de te testen code staat)
+In het xUnit project, selecteer dependency
+Rechtermuis [Add Reference]
+Kies de naam van de net aangemaakte Console App
+
+The [Fact] attribute denotes a method as a single test.
+Write your first tests, zie ook: https://xunit.github.io/docs/getting-started-dotnet-core.html#write-first-tests 
+Run de test mbv [Test][Run][All Test]
+
+Daarnaast bestaat het attribuut [Theory]
+[Theory]
+        [InlineData(1)]
+        [InlineData(3)]
+        [InlineData(5)]
+
+https://xunit.github.io/docs/comparisons.html
+
+Stap X: Gebruiken van de website
+
+------------------------------------------------------------------------------------------------------------------------
+TIP: http://localhost:<poortnummer>/[Controller]/[ActionName]/[Parameters(indien aanwezig)]
+bijv1. http://localhost:49866/helloworld/Welcome
+bijv2. http://localhost:49866/helloworld/Welcome/1
+bijv3. http://localhost:49866/helloworld/welcome/?naam=jan
+- Bij gebruik van een [id] de parameter van de methode als MethodeNaam(int id) doen
+bijv. Welcome(int id)
+- Of MethodeNaam(string naam) als er "?naam=jan" wordt gebruikt
+Bijv. Welcome(string naam)
+------------------------------------------------------------------------------------------------------------------------
