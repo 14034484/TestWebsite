@@ -5,15 +5,28 @@ Deze website heeft de volgende fucnties/eigenschappen:
 - ASP.NET Core 1.1
 - Authentication: Individual User Accounts
 
+
+
 Stap 1: Aanmaken van het project
 - Aanmaken project : https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?tabs=aspnetcore2x
 - Koppelen/aanmaken van Git aan het project : https://docs.microsoft.com/en-us/vsts/git/gitquickstart?tabs=visual-studio
 - Toevoegen van een authenticatie: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/
 
-Stap 2: Aanmaken van een map Models indien deze nog niet aanwezig is
+
+
+Stap 2: Aanmaken van een map Models en models indien deze nog niet aanwezig is
+- Gebruik: Data Annotaties: http://www.entityframeworktutorial.net/code-first/dataannotation-in-code-first.aspx
+- Wijzigen en verwijderen van een model: https://docs.microsoft.com/en-us/ef/core/saving/basic
+- Gebruiken van seeding
+- One-to-many relationshiphttp: //www.entityframeworktutorial.net/code-first/configure-one-to-many-relationship-in-code-first.aspx
+- Relationships: https://docs.microsoft.com/en-us/ef/core/modeling/relationships
+- Saving Related Data: https://docs.microsoft.com/en-us/ef/core/saving/related-data
+
 
 Stap 3: Aanmaken van een controller
 - Aanmaken controller: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller
+- Scaffolding a controller: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model
+- Redirect ipv view returneren (Post/Redirect/Get (PRG)): return RedirectToAction("Index");
 
 ------------------------------------------------------------------------------------------------------------------------
 TIP: Statische zoals plaatjes of stylesheet bestanden kan je plaatsen in de map wwwroot
@@ -32,9 +45,24 @@ Bijv. Student std = new Student() { StudentID = 1,
 TIP: Gebruiken van nullable types: http://www.tutorialsteacher.com/csharp/csharp-nullable-types
 Bijv. int? i = null;
 TIP: Gebruiken van var: http://www.tutorialsteacher.com/csharp/csharp-var-implicit-typed-local-variable
+TIP: ViewData["Title"] = "Movie List"; https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-view#passing-data-from-the-controller-to-the-view
 ------------------------------------------------------------------------------------------------------------------------
 
-Stap 4: Gebruiken van LINQ
+
+
+Stap 4: Aanmaken van een view
+- Aanmaken view: https://docs.asp.net/en/latest/tutorials/first-mvc-app/adding-view.html
+- Met [HttpGet] kun je parameters zien in de adresbalk
+- Met [HttpPost] worden de parameters “onzichtbaar” meegegeven
+- Gebruik een <form> voor formulieren
+
+------------------------------------------------------------------------------------------------------------------------
+TIP: @{ Layout = ""; } 
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+Stap 5: Gebruiken van LINQ
 ------------------------------------------------------------------------------------------------------------------------
 TIP: Vergeet niet te gebruiken: using System.Linq
 ------------------------------------------------------------------------------------------------------------------------
@@ -42,6 +70,10 @@ TIP: Vergeet niet te gebruiken: using System.Linq
 - LINQ Query Syntax: http://www.tutorialsteacher.com/linq/linq-query-syntax
 - LINQ Method Syntax: http://www.tutorialsteacher.com/linq/linq-method-syntax
 - Lambda Expression voor LINQ methodes: http://www.tutorialsteacher.com/linq/linq-lambda-expression
+- Deferred Executionhttp: //www.tutorialsteacher.com/linq/linq-deferred-execution
+- Linq projection operators (Anonymous types): http://www.tutorialsteacher.com/linq/linq-projection-operators
+- Eager Loading: .Include(x => x.Country)
+- Explicit loading: ctx.Entry(s).Reference(x => x.Country).Load();
 
 ------------------------------------------------------------------------------------------------------------------------
 TIP: Anonymous types
@@ -52,7 +84,34 @@ TIP: Anonymous Lambda Expression
 Bijv. s => s.Age > 12 && s.Age < 20
 ------------------------------------------------------------------------------------------------------------------------
 
-Stap 5: Testen
+
+
+Stap 6: aanmaken van de database
+- Add-Migration en Update-Database
+- Aanpassen: startup.cs
+// This method gets called by the runtime. Use this method to add
+// services to the container.
+public void ConfigureServices(IServiceCollection services)
+{
+    // Add framework services.
+    services.AddMvc();
+    services.AddDbContext<StudentContext>(options =>
+        options.UseSqlServer("Server=(localdb)\\mssqllocaldb;
+                              Database=Student.NewDb;
+                              Trusted_Connection=True;
+                              MultipleActiveResultSets=true"));
+} // String moet zonder spaties aan elkaar worden geplakt!!!
+
+- Aanpassen ContextClass
+private readonly StudentContext _context;
+    public StudentsController(StudentContext context)
+    {
+        _context = context;
+    }
+
+
+
+Stap 7: Testen
 Voeg aan de solution toe met [Add], [New Project] een xUnit Test Project (.Net Core) toe 
 In Visual Studio 2017 is dit de eenvoudigste manier
 Het geven van diverse commando’s (zoals in sommige handleidingen) is niet nodig
@@ -73,6 +132,8 @@ Daarnaast bestaat het attribuut [Theory]
         [InlineData(5)]
 
 https://xunit.github.io/docs/comparisons.html
+
+
 
 Stap X: Gebruiken van de website
 
