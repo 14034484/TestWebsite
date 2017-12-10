@@ -87,7 +87,6 @@ Bijv. s => s.Age > 12 && s.Age < 20
 
 
 Stap 6: aanmaken van de database
-- Add-Migration en Update-Database
 - Aanpassen: startup.cs
 // This method gets called by the runtime. Use this method to add
 // services to the container.
@@ -108,7 +107,10 @@ private readonly StudentContext _context;
     {
         _context = context;
     }
-
+OF
+- Aanpassen: appsettings.json (string voor database aanpassen)
+- Add-Migration -Context <NaamContext> en Update-Database -Context <NaamContext>
+- Gebruik Fluent API: https://docs.microsoft.com/en-us/ef/core/modeling/relationships
 
 
 Stap 7: Testen
